@@ -4,7 +4,7 @@ version: 0.1.0
 authors:
   - samgarasx <samgarasx@gmail.com>
 
-crystal: 0.26.0
+crystal: 0.26.1
 
 license: UNLICENSED
 
