@@ -27,7 +27,7 @@ class FruitController < ApplicationController
     fruit = Fruit.find_by no: params[:no]
 
     response = if fruit
-      { ok: true, error: "Fruit already exists" }
+      { ok: false, error: "Fruit already exists" }
     else
       fruit = Fruit.new
 
