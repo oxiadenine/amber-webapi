@@ -1,5 +1,7 @@
 class ApiController < ApplicationController
   def index
-    I18n.translate "welcome_amber_webapi"
+    respond_with do
+      text I18n.translate "welcome_amber_webapi"
+    end
   end
 end

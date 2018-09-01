@@ -3,13 +3,14 @@ Amber::Server.configure do
     plug Amber::Pipe::PoweredByAmber.new
     plug Amber::Pipe::Error.new
     plug Amber::Pipe::Logger.new
-    plug Amber::Pipe::CORS.new
   end
 
-  routes :web, "/api" do
+  routes :api, "/api" do
     get "/", ApiController, :index
-  end
-
-  routes :api do
+    get "/fruits", FruitController, :all
+    get "/fruits/:id", FruitController, :one
+    post "/fruits", FruitController, :new
+    put "/fruits/:id", FruitController, :edit
+    delete "/fruits/:id", FruitController, :delete
   end
 end
