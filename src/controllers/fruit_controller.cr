@@ -4,7 +4,11 @@ class FruitController < ApplicationController
   include Controller::Helpers
 
   def all
-    fruits = Fruit.all
+    fruitEntities = FruitEntity.all
+
+    fruits = fruitEntities.map do |fruitEntity|
+      Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
+    end
 
     response = Response::JSON.success fruits
 
@@ -14,9 +18,11 @@ class FruitController < ApplicationController
   end
 
   def one
-    fruit = Fruit.find params[:id].to_i64
+    fruitEntity = FruitEntity.find params[:id].to_i64
 
-    response = if fruit
+    response = if fruitEntity
+      fruit = Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
+
       Response::JSON.success fruit
     else
       Response::JSON.failure "Fruit does not exists"
@@ -28,17 +34,19 @@ class FruitController < ApplicationController
   end
 
   def new
-    fruit = Fruit.find_by no: params[:no]
+    fruitEntity = FruitEntity.find_by no: params[:no]
 
-    response = if fruit
+    response = if fruitEntity
       Response::JSON.failure "Fruit already exists"
     else
-      fruit = Fruit.new
+      fruitEntity = FruitEntity.new
 
-      fruit.no = params[:no]
-      fruit.description = params[:description]
+      fruitEntity.no = params[:no]
+      fruitEntity.description = params[:description]
 
-      fruit.save
+      fruitEntity.save
+
+      fruit = Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
 
       Response::JSON.success fruit
     end
@@ -49,13 +57,15 @@ class FruitController < ApplicationController
   end
 
   def edit
-    fruit = Fruit.find params[:id].to_i64
+    fruitEntity = FruitEntity.find params[:id].to_i64
 
-    response = if fruit
-      fruit.no = params[:no]
-      fruit.description = params[:description]
+    response = if fruitEntity
+      fruitEntity.no = params[:no]
+      fruitEntity.description = params[:description]
 
-      fruit.save
+      fruitEntity.save
+
+      fruit = Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
 
       Response::JSON.success fruit
     else
@@ -68,10 +78,12 @@ class FruitController < ApplicationController
   end
 
   def delete
-    fruit = Fruit.find params[:id].to_i64
+    fruitEntity = FruitEntity.find params[:id].to_i64
 
-    response = if fruit
-      fruit.destroy
+    response = if fruitEntity
+      fruitEntity.destroy
+
+      fruit = Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
 
       Response::JSON.success fruit
     else

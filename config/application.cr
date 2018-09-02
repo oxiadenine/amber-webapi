@@ -2,6 +2,7 @@ require "./initializers/**"
 
 require "amber"
 
+require "../src/entities/**"
 require "../src/controllers/application_controller"
 require "../src/controllers/**"
 require "../src/models/**"
