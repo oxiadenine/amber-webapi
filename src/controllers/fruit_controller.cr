@@ -1,8 +1,12 @@
+require "../helpers/json_response"
+
 class FruitController < ApplicationController
+  include Controller::Helpers
+
   def all
     fruits = Fruit.all
 
-    response = { ok: true, data: fruits }
+    response = Response::JSON.success fruits
 
     respond_with do
       json response.to_json
@@ -13,9 +17,9 @@ class FruitController < ApplicationController
     fruit = Fruit.find params[:id].to_i64
 
     response = if fruit
-      { ok: true, data: fruit }
+      Response::JSON.success fruit
     else
-      { ok: false, error: "Fruit does not exists" }
+      Response::JSON.failure "Fruit does not exists"
     end
 
     respond_with do
@@ -27,7 +31,7 @@ class FruitController < ApplicationController
     fruit = Fruit.find_by no: params[:no]
 
     response = if fruit
-      { ok: false, error: "Fruit already exists" }
+      Response::JSON.failure "Fruit already exists"
     else
       fruit = Fruit.new
 
@@ -36,7 +40,7 @@ class FruitController < ApplicationController
 
       fruit.save
 
-      { ok: true, data: fruit }
+      Response::JSON.success fruit
     end
 
     respond_with do
@@ -53,9 +57,9 @@ class FruitController < ApplicationController
 
       fruit.save
 
-      { ok: true, data: fruit }
+      Response::JSON.success fruit
     else
-      { ok: false, error: "Fruit does not exists" }
+      Response::JSON.failure "Fruit does not exists"
     end
 
     respond_with do
@@ -69,9 +73,9 @@ class FruitController < ApplicationController
     response = if fruit
       fruit.destroy
 
-      { ok: true, data: fruit }
+      Response::JSON.success fruit
     else
-      { ok: false, error: "Fruit does not exists" }
+      Response::JSON.failure "Fruit does not exists"
     end
 
     respond_with do
