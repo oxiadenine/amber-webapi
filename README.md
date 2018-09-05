@@ -11,4 +11,4 @@ To start your Amber server:
 3. Create and migrate your database with `bin/amber_webapi db create migrate`.
 4. Start Amber server with `bin/amber_webapi`
 
-Now you can visit http://localhost:3000/ from your browser.
+Now you can visit http://localhost:3000/api from your browser.
