@@ -21,7 +21,8 @@ process_count: 1
 # ssl_key_file:
 # ssl_cert_file:
 redis_url: "redis://localhost:6379"
-database_url: postgres://username:password@localhost:5432/amber_webapi
+database_url: sqlite3:./db/fruit_store.sqlite3
+auto_reload: true
 
 session:
   key: amber.session

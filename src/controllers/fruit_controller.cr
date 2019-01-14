@@ -6,8 +6,8 @@ class FruitController < ApplicationController
   def all
     fruitEntities = FruitEntity.all
 
-    fruits = fruitEntities.map do |fruitEntity|
-      Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
+    fruits = fruitEntities.map do |fe|
+      Fruit.new fe.id, fe.no, fe.description
     end
 
     response = Response::JSON.success fruits
@@ -18,7 +18,7 @@ class FruitController < ApplicationController
   end
 
   def one
-    fruitEntity = FruitEntity.find params[:id].to_i64
+    fruitEntity = FruitEntity.find params[:id].to_i32
 
     response = if fruitEntity
       fruit = Fruit.new fruitEntity.id, fruitEntity.no, fruitEntity.description
@@ -57,10 +57,9 @@ class FruitController < ApplicationController
   end
 
   def edit
-    fruitEntity = FruitEntity.find params[:id].to_i64
+    fruitEntity = FruitEntity.find params[:id].to_i32
 
     response = if fruitEntity
-      fruitEntity.no = params[:no]
       fruitEntity.description = params[:description]
 
       fruitEntity.save
@@ -78,7 +77,7 @@ class FruitController < ApplicationController
   end
 
   def delete
-    fruitEntity = FruitEntity.find params[:id].to_i64
+    fruitEntity = FruitEntity.find params[:id].to_i32
 
     response = if fruitEntity
       fruitEntity.destroy

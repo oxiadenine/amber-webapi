@@ -1,9 +1,9 @@
 class FruitEntity < Granite::Base
-  adapter pg
+  adapter sqlite
 
   table_name fruit
 
-  primary id : Int64
+  primary id : Int32
   field no : String
   field description : String
 

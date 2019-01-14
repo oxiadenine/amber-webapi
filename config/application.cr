@@ -1,4 +1,5 @@
-require "./initializers/**"
+require "./database.cr"
+require "./i18n.cr"
 
 require "amber"
 

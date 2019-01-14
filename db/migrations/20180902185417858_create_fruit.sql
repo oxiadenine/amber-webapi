@@ -1,8 +1,8 @@
 -- +micrate Up
 CREATE TABLE fruit (
-  id BIGSERIAL PRIMARY KEY,
-  no VARCHAR (20) NOT NULL UNIQUE,
-  description VARCHAR (50) NOT NULL
+  id INTEGER NOT NULL PRIMARY KEY,
+  no VARCHAR NOT NULL UNIQUE,
+  description TEXT NOT NULL
 );
 
 -- +micrate Down
