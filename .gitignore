@@ -1,16 +1,16 @@
-/doc/
-/lib/
-/.crystal/
-/.shards/
-/.vscode/
-/tmp/
-.env
-.encryption_key
-production.yml
-.DS_Store
-/bin/
-/node_modules
-
-# IntelliJ IDEA
+# IDE
 .idea/
-out/
+.vscode/
+
+# Build
+lib/
+bin/
+
+# Database
+db/*.sqlite3
+
+# Security
+.encryption_key
+
+# Configuration
+config/environments/production.yml
